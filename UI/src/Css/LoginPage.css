@@ -1,0 +1,143 @@
+.container {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 24rem;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group:last-of-type {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  color: #374151;
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  appearance: none;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  color: #374151;
+  line-height: 1.25rem;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+  border-color: #3b82f6;
+}
+
+.password-input {
+  margin-bottom: 0.75rem;
+}
+
+.error-message {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #dc2626;
+  border-radius: 0.25rem;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.submit-btn {
+  background-color: #3b82f6;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+.welcome-content {
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #16a34a;
+  margin-bottom: 1rem;
+}
+
+.welcome-text {
+  color: #6b7280;
+  margin-bottom: 1.5rem;
+}
+
+.logout-btn {
+  background-color: #ef4444;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+}
+
+.logout-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.5);
+}
