@@ -5,7 +5,8 @@ const multer = require("multer")
 const path = require("path")
 const {textureTshirtModel} = require('./model/texture.')
 
-const connection = mongoose.connect("mongodb+srv://rajat:rajat@cluster0.rnkwwxb.mongodb.net/SahilShopData")
+
+const connection = mongoose.connect(process.env.MONGODB_URI)
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -68,7 +69,7 @@ app.get("/getTshirtsCategoryWise/:category", async(req,res)=>{
     }
 })
 
-app.listen(8080, async()=>{
+app.listen(process.env.PORT, async()=>{
     try {
         await connection
          console.log("Connected to DB")
