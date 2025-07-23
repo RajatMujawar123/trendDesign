@@ -45,7 +45,7 @@ const AddProduct = () => {
       formDataToSend.append('category', formData.category)
       formDataToSend.append('price', parseFloat(formData.price))
 
-      const response = await fetch('http://localhost:8080/addtexturetshirt', {
+      const response = await fetch('https://backend-beta-eight-37.vercel.app/addtexturetshirt', {
         method: 'POST',
         body: formDataToSend
       })

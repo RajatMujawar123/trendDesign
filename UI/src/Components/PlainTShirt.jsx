@@ -12,7 +12,7 @@ const PlainTShirt = () => {
 
   useEffect(() => {
     
-    axios.get(`http://localhost:8080/getTshirtsCategoryWise/${category}`)
+    axios.get(`https://backend-beta-eight-37.vercel.app/getTshirtsCategoryWise/${category}`)
       .then((response) => {
         console.log("Fetched products:", response.data);
         setProducts(response.data);
@@ -43,7 +43,7 @@ Thank you!`;
           return (
             <div key={item._id} className="grid-item">
               <img 
-                src={`http://localhost:8080/${item.image}`} 
+                src={`https://backend-beta-eight-37.vercel.app/${item.image}`} 
                 alt={`${item.itemName}`} 
                 style={{width: '100%', height: 'auto'}}
               />
