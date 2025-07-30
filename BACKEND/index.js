@@ -4,6 +4,7 @@ const cors = require("cors")
 const multer = require("multer")
 const path = require("path")
 const {textureTshirtModel} = require('./model/texture.')
+require('dotenv').config()
 
 
 const connection = mongoose.connect(process.env.MONGODB_URI)
