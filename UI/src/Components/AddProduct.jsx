@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import '../Css/AddProduct.css'
 
+const MAX_FILE_SIZE = 2 * 1024 * 1024 // 2MB
+
 const AddProduct = () => {
   const [formData, setFormData] = useState({
     itemName: '',
@@ -8,7 +10,6 @@ const AddProduct = () => {
     category: '',
     price: ''
   })
-  
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -22,15 +23,22 @@ const AddProduct = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
-    if (file && file.type === 'image/png') {
-      setFormData(prev => ({
-        ...prev,
-        image: file
-      }))
-    } else {
+    if (!file) return
+
+    if (file.type !== 'image/png') {
       alert('Please select a PNG image file')
       e.target.value = ''
+      return
     }
+    if (file.size > MAX_FILE_SIZE) {
+      alert('File size must be under 2MB')
+      e.target.value = ''
+      return
+    }
+    setFormData(prev => ({
+      ...prev,
+      image: file
+    }))
   }
 
   const handleSubmit = async (e) => {
@@ -38,12 +46,18 @@ const AddProduct = () => {
     setLoading(true)
     setMessage('')
 
+    if (!formData.image) {
+      setMessage('Please select an image')
+      setLoading(false)
+      return
+    }
+
     try {
       const formDataToSend = new FormData()
       formDataToSend.append('itemName', formData.itemName)
       formDataToSend.append('image', formData.image)
       formDataToSend.append('category', formData.category)
-      formDataToSend.append('price', parseFloat(formData.price))
+      formDataToSend.append('price', formData.price)
 
       const response = await fetch('https://backend-beta-eight-37.vercel.app/addtexturetshirt', {
         method: 'POST',
@@ -51,7 +65,7 @@ const AddProduct = () => {
       })
 
       const data = await response.json()
-      
+
       if (response.ok) {
         setMessage('Product added successfully!')
         setFormData({
@@ -60,7 +74,6 @@ const AddProduct = () => {
           category: '',
           price: ''
         })
-        // Reset file input
         document.getElementById('image').value = ''
       } else {
         setMessage(data.msg || 'Error adding product')
@@ -73,12 +86,10 @@ const AddProduct = () => {
   }
 
   return (
-    <div className="container"> 
-      <div className="form-container">
+    <div className="container">
+      <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="itemName" className="label">
-            Item Name
-          </label>
+          <label htmlFor="itemName" className="label">Item Name</label>
           <input
             type="text"
             id="itemName"
@@ -92,9 +103,7 @@ const AddProduct = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="image" className="label">
-            Image (PNG only)
-          </label>
+          <label htmlFor="image" className="label">Image (PNG only, max 2MB)</label>
           <input
             type="file"
             id="image"
@@ -112,9 +121,7 @@ const AddProduct = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="category" className="label">
-            Category
-          </label>
+          <label htmlFor="category" className="label">Category</label>
           <select
             id="category"
             name="category"
@@ -132,9 +139,7 @@ const AddProduct = () => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="price" className="label">
-            Price
-          </label>
+          <label htmlFor="price" className="label">Price</label>
           <input
             type="number"
             id="price"
@@ -150,19 +155,18 @@ const AddProduct = () => {
         </div>
 
         <button
-          type="button"
-          onClick={handleSubmit}
+          type="submit"
           disabled={loading}
           className={`submit-btn ${loading ? 'disabled' : ''}`}
         >
           {loading ? 'Adding Product...' : 'Add Product'}
         </button>
-      </div>
+      </form>
 
       {message && (
         <div className={`message ${
-          message.includes('successfully') 
-            ? 'success' 
+          message.includes('successfully')
+            ? 'success'
             : 'error'
         }`}>
           {message}
@@ -173,3 +177,5 @@ const AddProduct = () => {
 }
 
 export default AddProduct
+
+
